@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Time Bank — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">The Time Bank</div>
+    <div class="top-actions">
+      <div id="topUser">—</div>
+      <button id="themeToggle" class="ghost">Theme</button>
+      <button id="btnSignOut" class="ghost">Sign out</button>
+    </div>
+  </header>
+
+  <main class="container grid-3">
+    <section class="card">
+      <h2>Welcome, <span id="userName">User</span></h2>
+      <p class="small muted">Balance: <strong id="userBalance">0</strong> hours</p>
+
+      <div class="hr"></div>
+
+      <h3>Add an offer</h3>
+      <label>Service title
+        <input id="offerTitle" type="text" placeholder="e.g., Math tutoring" />
+      </label>
+      <label>Duration (hours)
+        <input id="offerHours" type="number" min="1" value="1" />
+      </label>
+
+      <label>Quick pick ideas
+        <select id="presetSelect">
+          <option value="">— choose a sample —</option>
+          <option>Grocery pickup / errands</option>
+          <option>1-on-1 tutoring (math)</option>
+          <option>Moving help (lifting & loading)</option>
+          <option>Resume review / cover letter</option>
+          <option>Babysitting (1 child)</option>
+        </select>
+      </label>
+
+      <button id="btnAddOffer">Post Offer</button>
+
+      <div class="hr"></div>
+
+      <h3>My posted offers</h3>
+      <div id="myOffers">No offers yet.</div>
+    </section>
+
+    <section class="card">
+      <h3>Available offers</h3>
+      <div id="offersList" class="offers-list">Loading...</div>
+      <div class="hr"></div>
+      <h3>Request / Accept</h3>
+      <p class="small muted">Click Request to request a posted service (this will adjust balances).</p>
+    </section>
+
+    <aside class="card">
+      <h3>Your Private Feed</h3>
+      <div id="feed" class="feed"></div>
+      <div class="hr"></div>
+      <h4>Quick controls</h4>
+      <div class="controls">
+        <button class="ghost" id="btnSimulate">Simulate activity</button>
+        <button class="ghost" id="btnClearFeed">Clear Feed</button>
+      </div>
+    </aside>
+  </main>
+
+  <div id="toasts" class="toasts"></div>
+  <audio id="notifySound" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA="></audio>
+
+  <script src="script.js"></script>
+  <script src="dashboard.js"></script>
+  <script>
+    // theme toggle sync
+    document.getElementById('themeToggle').addEventListener('click', ()=>{
+      const cur = localStorage.getItem('tb_theme') === 'dark' ? 'dark' : 'light';
+      const next = cur === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('tb_theme', next);
+      document.documentElement.setAttribute('data-theme', next);
+    });
+    // apply initial theme on load
+    document.documentElement.setAttribute('data-theme', localStorage.getItem('tb_theme') || 'light');
+  </script>
+</body>
+</html>

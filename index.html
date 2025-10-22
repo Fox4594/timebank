@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Time Bank — Sign In</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-top">
+        <h1>The Time Bank</h1>
+        <div class="theme-toggle">
+          <button id="themeBtn" class="ghost">Toggle Theme</button>
+        </div>
+      </div>
+      <p class="tag">Trade time, not money — join your campus community</p>
+
+      <div class="forms">
+        <div class="form-col">
+          <h3>Create account</h3>
+          <label>Name
+            <input id="regName" type="text" placeholder="Your name" />
+          </label>
+          <label>Email
+            <input id="regEmail" type="email" placeholder="you@example.edu" />
+          </label>
+          <label>Starting hours
+            <input id="regBalance" type="number" value="0" min="0" />
+          </label>
+          <button id="btnRegister">Create account</button>
+        </div>
+
+        <div class="form-col">
+          <h3>Sign in</h3>
+          <label>Email
+            <input id="signEmail" type="email" placeholder="you@example.edu" />
+          </label>
+          <button id="btnSignIn" class="ghost">Sign in</button>
+
+          <div class="demo-note">
+            Or try a demo user:
+            <div style="margin-top:8px">
+              <button class="ghost" id="demoAlex">Alex</button>
+              <button class="ghost" id="demoTaylor">Taylor</button>
+              <button class="ghost" id="demoJordan">Jordan</button>
+              <button class="ghost" id="demoCasey">Casey</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="small muted">This demo stores data locally in your browser. Works offline — great for presenting.</p>
+    </div>
+  </main>
+
+  <audio id="ping" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA="></audio>
+
+  <script src="script.js"></script>
+  <script>
+    // demo buttons
+    document.getElementById('demoAlex').addEventListener('click', ()=> loadDemo('Alex'));
+    document.getElementById('demoTaylor').addEventListener('click', ()=> loadDemo('Taylor'));
+    document.getElementById('demoJordan').addEventListener('click', ()=> loadDemo('Jordan'));
+    document.getElementById('demoCasey').addEventListener('click', ()=> loadDemo('Casey'));
+    // theme toggle
+    const themeBtn = document.getElementById('themeBtn');
+    themeBtn.addEventListener('click', ()=> {
+      const cur = localStorage.getItem('tb_theme') === 'dark' ? 'dark' : 'light';
+      const next = cur === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('tb_theme', next);
+      applyTheme();
+    });
+    function applyTheme(){ const t = localStorage.getItem('tb_theme') || 'light'; document.documentElement.setAttribute('data-theme', t); }
+    applyTheme();
+  </script>
+</body>
+</html>
